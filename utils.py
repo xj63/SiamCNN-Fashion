@@ -46,5 +46,3 @@ def plot_training_history(history, save_path=None):
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
         plt.savefig(save_path)
         print(f"Training history plot saved to {save_path}")
-
-    plt.show()
