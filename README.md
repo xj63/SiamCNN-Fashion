@@ -42,3 +42,10 @@ After training, you can find:
 - `--epochs`: Number of epochs (default: 10)
 - `--learning_rate`: Learning rate (default: 0.001)
 - `--seed`: Random seed (default: 42)
+
+## Generate Website Assets
+
+```bash
+uv run main.py
+mv ./outputs/**/*.png ./website/assets/
+```

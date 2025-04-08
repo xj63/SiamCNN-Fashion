@@ -352,14 +352,6 @@ def export_analysis_report(
 
 
 def generate_class_examples(dataset, output_dir="./website/assets"):
-    """
-    为每个类别生成示例图片，用于网站展示
-
-    参数:
-        dataset: Fashion MNIST 数据集
-        output_dir: 输出目录路径
-    """
-
     # 确保输出目录存在
     os.makedirs(output_dir, exist_ok=True)
 
@@ -417,7 +409,318 @@ def generate_class_examples(dataset, output_dir="./website/assets"):
             dpi=150,
         )
         plt.close()
+        print(f"Generated example image for class {label} ({class_names[label]})")
 
-        print(f"生成类别 {label} ({class_names[label]}) 的示例图片")
+    print(f"All class example images have been saved to {output_dir}")
 
-    print(f"所有类别示例图片已保存到 {output_dir}")
+
+def generate_architecture_diagram(output_dir="./output"):
+    """
+    生成 Siamese Network 架构图
+
+    参数:
+        output_dir: 输出目录路径
+    """
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
+    import os
+
+    # 确保输出目录存在
+    os.makedirs(output_dir, exist_ok=True)
+
+    # 创建架构图
+    fig, ax = plt.figure(figsize=(12, 6)), plt.gca()
+
+    # 设置背景为白色
+    ax.set_facecolor("white")
+
+    # 输入图像
+    img1_pos = (1, 6)
+    img2_pos = (1, 1)
+    img_size = (2, 2)
+
+    img1 = patches.Rectangle(
+        img1_pos,
+        *img_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightgray",
+        label="Input Image 1",
+    )
+    img2 = patches.Rectangle(
+        img2_pos,
+        *img_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightgray",
+        label="Input Image 2",
+    )
+    ax.add_patch(img1)
+    ax.add_patch(img2)
+
+    # 标注图像
+    ax.text(
+        img1_pos[0] + img_size[0] / 2,
+        img1_pos[1] + img_size[1] / 2,
+        "Image 1\n28x28x1",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+    ax.text(
+        img2_pos[0] + img_size[0] / 2,
+        img2_pos[1] + img_size[1] / 2,
+        "Image 2\n28x28x1",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+
+    # CNN 特征提取器
+    cnn1_pos = (4, 6)
+    cnn2_pos = (4, 1)
+    cnn_size = (2, 2)
+
+    cnn1 = patches.Rectangle(
+        cnn1_pos,
+        *cnn_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightblue",
+        label="CNN Feature Extractor",
+    )
+    cnn2 = patches.Rectangle(
+        cnn2_pos,
+        *cnn_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightblue",
+        label="CNN Feature Extractor",
+    )
+    ax.add_patch(cnn1)
+    ax.add_patch(cnn2)
+
+    # 标注 CNN
+    ax.text(
+        cnn1_pos[0] + cnn_size[0] / 2,
+        cnn1_pos[1] + cnn_size[1] / 2,
+        "CNN\nFeature\nExtractor",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+    ax.text(
+        cnn2_pos[0] + cnn_size[0] / 2,
+        cnn2_pos[1] + cnn_size[1] / 2,
+        "CNN\nFeature\nExtractor",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+
+    # 特征向量
+    feat1_pos = (7, 6.25)
+    feat2_pos = (7, 1.25)
+    feat_size = (2, 1.5)
+
+    feat1 = patches.Rectangle(
+        feat1_pos,
+        *feat_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightyellow",
+        label="Feature Vector",
+    )
+    feat2 = patches.Rectangle(
+        feat2_pos,
+        *feat_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightyellow",
+        label="Feature Vector",
+    )
+    ax.add_patch(feat1)
+    ax.add_patch(feat2)
+
+    # 标注特征向量
+    ax.text(
+        feat1_pos[0] + feat_size[0] / 2,
+        feat1_pos[1] + feat_size[1] / 2,
+        "Feature Vector\n64-dim",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+    ax.text(
+        feat2_pos[0] + feat_size[0] / 2,
+        feat2_pos[1] + feat_size[1] / 2,
+        "Feature Vector\n64-dim",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+
+    # 距离计算
+    dist_pos = (10, 3.5)
+    dist_size = (2, 2)
+
+    dist = patches.Rectangle(
+        dist_pos,
+        *dist_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightgreen",
+        label="Distance Computation",
+    )
+    ax.add_patch(dist)
+
+    # 标注距离计算
+    ax.text(
+        dist_pos[0] + dist_size[0] / 2,
+        dist_pos[1] + dist_size[1] / 2,
+        "Euclidean\nDistance",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+
+    # 输出
+    out_pos = (13, 3.75)
+    out_size = (1.5, 1.5)
+
+    out = patches.Rectangle(
+        out_pos,
+        *out_size,
+        linewidth=1,
+        edgecolor="black",
+        facecolor="lightcoral",
+        label="Similarity Score",
+    )
+    ax.add_patch(out)
+
+    # 标注输出
+    ax.text(
+        out_pos[0] + out_size[0] / 2,
+        out_pos[1] + out_size[1] / 2,
+        "Similarity\nScore\n(0-1)",
+        ha="center",
+        va="center",
+        fontsize=10,
+    )
+
+    # 添加箭头连接
+    # 图像到CNN
+    ax.arrow(
+        img1_pos[0] + img_size[0],
+        img1_pos[1] + img_size[1] / 2,
+        cnn1_pos[0] - img1_pos[0] - img_size[0] - 0.1,
+        0,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+    ax.arrow(
+        img2_pos[0] + img_size[0],
+        img2_pos[1] + img_size[1] / 2,
+        cnn2_pos[0] - img2_pos[0] - img_size[0] - 0.1,
+        0,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+
+    # CNN到特征向量
+    ax.arrow(
+        cnn1_pos[0] + cnn_size[0],
+        cnn1_pos[1] + cnn_size[1] / 2,
+        feat1_pos[0] - cnn1_pos[0] - cnn_size[0] - 0.1,
+        0,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+    ax.arrow(
+        cnn2_pos[0] + cnn_size[0],
+        cnn2_pos[1] + cnn_size[1] / 2,
+        feat2_pos[0] - cnn2_pos[0] - cnn_size[0] - 0.1,
+        0,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+
+    # 特征向量到距离计算
+    ax.arrow(
+        feat1_pos[0] + feat_size[0],
+        feat1_pos[1] + feat_size[1] / 2,
+        dist_pos[0] - feat1_pos[0] - feat_size[0] - 0.1,
+        dist_pos[1] - feat1_pos[1] - feat_size[1] / 2 + dist_size[1] / 2,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+    ax.arrow(
+        feat2_pos[0] + feat_size[0],
+        feat2_pos[1] + feat_size[1] / 2,
+        dist_pos[0] - feat2_pos[0] - feat_size[0] - 0.1,
+        dist_pos[1] + dist_size[1] / 2 - feat2_pos[1] - feat_size[1] / 2,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+
+    # 距离计算到输出
+    ax.arrow(
+        dist_pos[0] + dist_size[0],
+        dist_pos[1] + dist_size[1] / 2,
+        out_pos[0] - dist_pos[0] - dist_size[0] - 0.1,
+        0,
+        head_width=0.1,
+        head_length=0.1,
+        fc="black",
+        ec="black",
+    )
+
+    # 添加权重共享标识
+    ax.plot([5, 5], [3, 4], "k--", linewidth=1)
+    ax.text(
+        5, 3.5, "Shared Weights", ha="center", va="center", fontsize=10, rotation=90
+    )
+
+    # 添加注释说明指数变换
+    ax.text(
+        12,
+        5,
+        "sim = exp(-dist)",
+        ha="center",
+        va="center",
+        fontsize=10,
+        bbox=dict(facecolor="white", alpha=0.7, boxstyle="round"),
+    )
+
+    # 设置轴范围
+    ax.set_xlim(0, 16)
+    ax.set_ylim(0, 9)
+
+    # 移除坐标轴
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+
+    # 添加标题
+    plt.title("Siamese Network Architecture with Euclidean Distance", fontsize=14)
+
+    # 保存图片
+    plt.savefig(f"{output_dir}/architecture.png", bbox_inches="tight", dpi=300)
+    plt.close()
+
+    print(f"Architecture diagram has been saved to {output_dir}/architecture.png")

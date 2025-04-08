@@ -4,7 +4,13 @@ import torch
 from data import load_fashion_mnist, create_data_loaders, FASHION_MNIST_CLASSES
 from train import train_model
 from evaluate import detailed_evaluation
-from utils import set_seed, get_device, plot_training_history, generate_class_examples
+from utils import (
+    set_seed,
+    get_device,
+    plot_training_history,
+    generate_class_examples,
+    generate_architecture_diagram,
+)
 
 
 def main(args):
@@ -26,6 +32,11 @@ def main(args):
     ):
         print("Generating class example images...")
         generate_class_examples(train_dataset, output_dir=class_img_dir)
+
+    # 生成架构图
+    architecture_path = args.output_dir
+    print("Generating architecture diagram for website...")
+    generate_architecture_diagram(output_dir=architecture_path)
 
     # 创建数据加载器
     print("Creating data loaders...")
@@ -98,8 +109,8 @@ if __name__ == "__main__":
     )
 
     # 训练参数
-    parser.add_argument("--batch_size", type=int, default=64, help="Batch size")
-    parser.add_argument("--epochs", type=int, default=10, help="Number of epochs")
+    parser.add_argument("--batch_size", type=int, default=128, help="Batch size")
+    parser.add_argument("--epochs", type=int, default=20, help="Number of epochs")
     parser.add_argument(
         "--learning_rate", type=float, default=0.001, help="Learning rate"
     )
