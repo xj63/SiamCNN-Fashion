@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 标题样式 */
+h1,
+h2,
+h3,
+h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid #eaecef;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #0066cc;
+}
+
+h4 {
+    font-size: 1.25rem;
+    color: #444;
+    margin-top: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* 头部样式 */
+header {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 0;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #4b6cb7;
+}
+
+/* 主要内容部分 */
+.section {
+    padding: 4rem 0;
+}
+
+.alternate-bg {
+    background-color: #f0f5ff;
+}
+
+/* 卡片样式 */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 网格布局 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+}
+
+/* 图片容器 */
+.img-container {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.full-width-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.caption {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Fashion MNIST 示例图片 */
+.fashion-mnist-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.class-item {
+    text-align: center;
+}
+
+.class-item .img-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.class-item .img-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.class-item p {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* 指标卡片 */
+.metrics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+}
+
+.metric-item {
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+    margin: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4b6cb7;
+    margin-bottom: 0.5rem;
+}
+
+.metric-name {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 参数表格 */
+.parameters-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.parameters-table th,
+.parameters-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.parameters-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+.parameters-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 分析列表 */
+.analysis ul,
+.findings ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.analysis li,
+.findings li {
+    margin-bottom: 0.5rem;
+}
+
+/* 页脚样式 */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer a {
+    color: #99ccff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* 媒体查询 - 适应小屏幕 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .metrics {
+        flex-direction: column;
+    }
+
+    .metric-item {
+        margin: 0.5rem 0;
+    }
+}
+
+/* 架构图样式 */
+.architecture-diagram {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* 移动端导航栏优化 */
+@media (max-width: 768px) {
+    /* 默认隐藏导航菜单 */
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        padding: 0.75rem 0;
+        width: 100%;
+        display: block;
+    }
+
+    /* 添加汉堡菜单图标 */
+    .menu-toggle {
+        display: block;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 1rem 0;
+        text-align: right;
+    }
+
+    /* 调整导航栏布局 */
+    nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* 添加网站标题到导航栏 */
+    .nav-title {
+        color: white;
+        font-weight: 600;
+        font-size: 1.2rem;
+        display: block;
+    }
+
+    /* 当菜单打开时的遮罩层 */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        display: none;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+}
+
+/* 桌面端隐藏菜单按钮和导航标题 */
+.menu-toggle,
+.nav-title {
+    display: none;
+}
