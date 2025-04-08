@@ -429,7 +429,7 @@ def generate_architecture_diagram(output_dir="./output"):
     os.makedirs(output_dir, exist_ok=True)
 
     # 创建架构图
-    fig, ax = plt.figure(figsize=(12, 6)), plt.gca()
+    _fig, ax = plt.figure(figsize=(12, 6)), plt.gca()
 
     # 设置背景为白色
     ax.set_facecolor("white")
