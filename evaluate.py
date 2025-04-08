@@ -2,6 +2,7 @@ import torch
 from sklearn.metrics import accuracy_score
 from tqdm import tqdm
 
+
 def evaluate_model(model, test_loader, criterion, device):
     """评估模型性能"""
     model.eval()
@@ -17,7 +18,8 @@ def evaluate_model(model, test_loader, criterion, device):
             loss = criterion(outputs, labels)
             test_loss += loss.item()
 
-            # 计算预测结果
+            # 计算预测结果 - 基于相似度阈值
+            # 对于欧氏距离模型，通常相似度>0.5表示相似
             preds = (outputs > 0.5).float()
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
@@ -27,6 +29,7 @@ def evaluate_model(model, test_loader, criterion, device):
     accuracy = accuracy_score(all_labels, all_preds)
 
     return test_loss, accuracy
+
 
 def detailed_evaluation(model, test_loader, device):
     """详细评估模型，包括准确率和其他指标"""
@@ -48,6 +51,6 @@ def detailed_evaluation(model, test_loader, device):
 
     # 这里可以添加更多评估指标，如精确率、召回率、F1分数等
 
-    print(f'Final Test Accuracy: {accuracy:.4f}')
+    print(f"Final Test Accuracy: {accuracy:.4f}")
 
     return accuracy
