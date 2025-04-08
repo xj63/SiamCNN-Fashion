@@ -4,14 +4,29 @@ import torchvision.transforms as transforms
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 
+# Fashion MNIST类别名
+FASHION_MNIST_CLASSES = [
+    "T-shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot",
+]
+
+
 def get_data_transforms():
     """定义数据预处理转换"""
-    return transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize((0.5,), (0.5,))
-    ])
+    return transforms.Compose(
+        [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
+    )
 
-def load_fashion_mnist(root='./data'):
+
+def load_fashion_mnist(root="./data"):
     """加载Fashion MNIST数据集"""
     transform = get_data_transforms()
 
@@ -25,12 +40,14 @@ def load_fashion_mnist(root='./data'):
 
     return train_dataset, test_dataset
 
+
 class SiameseDataset(Dataset):
     """创建孪生网络数据集"""
+
     def __init__(self, dataset, num_pairs=10000):
         self.dataset = dataset
         self.num_pairs = num_pairs
-        self.pairs = self._create_pairs()
+        self.pairs, self.labels = self._create_pairs()
 
     def _create_pairs(self):
         pairs = []
@@ -59,7 +76,7 @@ class SiameseDataset(Dataset):
             pairs.append((idx1, idx2))
             labels.append(0)  # 0表示不相似
 
-        return list(zip(pairs, labels))
+        return list(zip(pairs, labels)), labels
 
     def __len__(self):
         return len(self.pairs)
@@ -70,12 +87,17 @@ class SiameseDataset(Dataset):
         img2, _ = self.dataset[idx2]
         return img1, img2, torch.tensor(label, dtype=torch.float32)
 
-def create_data_loaders(train_dataset, test_dataset, batch_size=64, train_pairs=10000, test_pairs=2000):
+
+def create_data_loaders(
+    train_dataset, test_dataset, batch_size=64, train_pairs=10000, test_pairs=2000
+):
     """创建训练和测试数据加载器"""
     train_siamese_dataset = SiameseDataset(train_dataset, num_pairs=train_pairs)
     test_siamese_dataset = SiameseDataset(test_dataset, num_pairs=test_pairs)
 
-    train_loader = DataLoader(train_siamese_dataset, batch_size=batch_size, shuffle=True)
+    train_loader = DataLoader(
+        train_siamese_dataset, batch_size=batch_size, shuffle=True
+    )
     test_loader = DataLoader(test_siamese_dataset, batch_size=batch_size, shuffle=False)
 
     return train_loader, test_loader
