@@ -10,6 +10,31 @@ See Website <https://simacnn-fashion.xj63.fun>
 - CNN-based feature extraction
 - Trained and evaluated on Fashion MNIST dataset
 
+## Available Model Versions
+
+This repository contains multiple versions of our Siamese CNN model for Fashion MNIST similarity learning. You can access different implementations through the [tags](https://github.com/xj63/SiamCNN-Fashion/tags).
+
+### [large-model](https://github.com/xj63/SiamCNN-Fashion/tree/large-model)
+Our most comprehensive implementation featuring:
+- Three convolutional layers for feature extraction
+- Higher-dimensional feature embeddings (128-D)
+- Fully connected layers for similarity judgment
+
+### [small-model](https://github.com/xj63/SiamCNN-Fashion/tree/small-model)
+A more efficient version based on the large model with:
+- Reduced architecture with two convolutional layers
+- Lower-dimensional feature embeddings (64-D)
+
+### [euclidean-distance](https://github.com/xj63/SiamCNN-Fashion/tree/euclidean-distance)
+Our current baseline implementation that:
+- Builds on the small-model architecture
+- Replaces the fully connected layer similarity judgment with direct Euclidean distance measurement
+- Provides a more interpretable similarity metric
+- Requires fewer parameters and is more generalizable to unseen classes
+- **This is the version featured in the main documentation**
+
+Each version includes complete training code.
+
 ## Installation
 
 ```bash
